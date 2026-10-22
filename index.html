@@ -73,5 +73,177 @@
     </nav>
     <footer>Rock On Enterprises · Thank you for connecting with us!</footer>
   </main>
+
+  
+<!-- Rock On Enterprises: Location Button -->
+<div class="location-section">
+  <h2>📍 Visit Our Shop</h2>
+  <p>Find Rock On Enterprises on Google Maps.</p>
+
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Rock+On+Enterprises+Kanjurmarg+East+Mumbai"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="location-button"
+  >
+    📍 Get Directions
+  </a>
+</div>
+
+<style>
+  .location-section {
+    text-align: center;
+    margin: 25px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .location-button {
+    display: inline-block;
+    padding: 14px 22px;
+    background: #1769e0;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+
+  .location-button:hover {
+    background: #0e4fae;
+  }
+</style>
+
+
+<!-- Rock On Enterprises: UPI Payment Section -->
+<section id="upi-payment" class="payment-section">
+  <h2>💳 Pay via UPI</h2>
+  <p>Enter your payment amount to continue to your UPI app.</p>
+
+  <form id="upi-payment-form">
+    <label for="upi-amount">Amount (₹)</label>
+
+    <input
+      id="upi-amount"
+      type="number"
+      min="1"
+      max="100000"
+      step="0.01"
+      placeholder="Enter amount, e.g. 500"
+      required
+    />
+
+    <button type="submit" class="upi-pay-button">
+      Pay via UPI
+    </button>
+  </form>
+
+  <p class="upi-details">
+    Pay to: <strong>Rock On Enterprises</strong><br />
+    UPI ID: <strong>mannrx7350@oksbi</strong>
+  </p>
+
+  <p class="upi-safety">
+    Check the recipient and amount in your UPI app before paying.
+    Payment is not confirmed until you verify receipt.
+  </p>
+</section>
+
+<style>
+  .payment-section {
+    max-width: 420px;
+    margin: 30px auto;
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    background: #ffffff;
+    color: #222222;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.10);
+    font-family: Arial, sans-serif;
+  }
+
+  .payment-section h2 {
+    margin-top: 0;
+  }
+
+  .payment-section label {
+    display: block;
+    text-align: left;
+    margin: 18px 0 8px;
+    font-weight: bold;
+  }
+
+  .payment-section input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .upi-pay-button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #147d43;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .upi-pay-button:hover {
+    background: #0e6535;
+  }
+
+  .upi-details,
+  .upi-safety {
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .upi-safety {
+    color: #555555;
+  }
+</style>
+
+<script>
+  document
+    .getElementById("upi-payment-form")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const amountInput = document.getElementById("upi-amount");
+      const amount = Number(amountInput.value);
+
+      if (
+        !Number.isFinite(amount) ||
+        amount < 1 ||
+        amount > 100000 ||
+        Math.round(amount * 100) !== amount * 100
+      ) {
+        alert("Enter a valid amount between ₹1 and ₹1,00,000.");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        pa: "mannrx7350@oksbi",
+        pn: "Rock On Enterprises",
+        am: amount.toFixed(2),
+        cu: "INR",
+        tn: "Rock On Enterprises payment"
+      });
+
+      const upiUrl = "upi://pay?" + params.toString();
+
+      // Opens a compatible UPI app on supported devices.
+      window.location.href = upiUrl;
+    });
+</script>
+
+
 </body>
 </html>
